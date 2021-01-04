@@ -1,0 +1,364 @@
+/* 
+ primary color: #38C172
+ black: #212934
+ dark grey: #8895A7
+ light grey: #B0B0B0
+
+ 
+ */
+
+
+/* -------------------------------------------- */
+/* GENERAL STYLES */
+/* ------------------------------------------- */
+* {
+    font-family: 'Karla', sans-serif;
+    font-size: 18px;
+    color: #212934;
+    line-height: 1.5;
+    /*Layout Lines */
+    /*outline: 1px solid red !important;*/
+}
+
+body {
+    background-color: #F8F9FA;
+    font-family: 'Karla', sans-serif;
+}
+
+/* Text */
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+    line-height: 1.5;
+}
+
+.h1, h1 {
+    font-size: 36px;
+}
+
+p, a, i {
+    color: #8895A7;
+}
+
+a:hover {
+    color: #8895A7;
+}
+
+
+.primary-text {
+   color: #212934; 
+}
+
+.secondary-text {
+    color: #8895A7;
+}
+
+.tertiary-text {
+    color: #B8C4CE;
+}
+
+
+/* Layout */
+.container {
+    max-width: 1280px;
+}
+
+/* Buttons */
+
+.btn {
+    padding: 4px 18px;
+    font-size: 18px;
+}
+
+.btn-primary {
+    background-color: #38C172;
+    border-color: #38C172;
+    box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, 0.2);
+    color: #ffffff;
+    font-size: 18px;
+}
+
+.btn-primary:focus {
+    background-color: #27874F;
+    border-color: #38C172;
+    box-shadow: 0 0 0 .2rem rgba(39, 135, 79, .5);
+ }
+
+.btn-primary:hover {
+    box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, 0.2);
+    background-color: #32ad66;
+    border-color: #32ad66;
+
+}
+
+.btn-primary:active {
+    box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, 0.2);
+    background-color: #32ad66;
+    border-color: #32ad66;
+
+}
+
+.search-btn {
+    margin-left: 10px;
+}
+
+.btn-secondary {
+    margin-bottom: 5px;
+    background-color: #ffffff;
+    color: #38C172;
+    border: 2px solid #E1E7EC;
+    box-shadow: none;
+    font-size: 18px;
+}
+
+.btn-secondary:hover {
+    background-color: #ffffff;
+    color: #38C172;
+    border: 2px solid #E1E7EC;
+}
+
+.btn-secondary:focus {
+    box-shadow: none;
+    background-color: #E1E7EC;
+    border: none;
+    border: 2px solid #E1E7EC;
+}
+
+.btn-secondary:not(:disabled):not(.disabled):active {
+    box-shadow: none;
+    background-color: #CFD6DE;
+    border: none;
+    color: #38C172;
+}
+
+.btn-tertiary {
+	margin-bottom: 5px;
+	color: #8895A7;
+	margin-right: 0;
+	background-color: #E1E7EC;
+	font-weight: bold;
+}
+
+.btn-tertiary:focus {
+    box-shadow: none;
+}
+
+/* Alerts */
+.alert-success {
+    color: #145239;
+    background-color: #A8EEC1;
+    border-color:  #74D99F;
+}
+
+
+/* -------------------------------------------- */
+/* NAV STYLES */
+/* ------------------------------------------- */
+
+/* Header */
+.navbar-brand a {
+    text-decoration: none;
+    color: #38C172;
+}
+
+.bg-light {
+    background-color: #ffffff !important;
+
+}
+
+.navbar {
+    padding: 0 5px 5px 5px;
+}
+
+.nav-link {
+    font-size: 16px !important;
+    color: #38C172;
+}
+.nav-link:hover {
+    color: #249C57;
+}
+
+.fas.fa-campground {
+    color: #34b269;
+    margin-right: 10px;
+    font-size: 22px;
+}
+
+.fa-user-circle {
+    color: #B8C4CE;
+    margin-right: 10px;
+    font-size: 15px;
+}
+
+
+/* -------------------------------------------- */
+/* FORMS */
+/* ------------------------------------------- */
+
+/* General Styles */
+.form {
+        padding: 20px;
+}
+
+.form h1 {
+        text-align: center;
+        width: 100%;
+}
+    
+.form-comp {
+        width: 45%; 
+        margin: 30px auto;
+}
+
+.form-control {
+    color: #8895A7;
+    font-size: 16px;
+    height: 36px;
+}
+
+.form-control::placeholder {
+    color: #8895A7;
+    font-size: 16px;
+    height: 36px;
+}
+
+label {
+    color: #8895A7;
+}
+/* SEARCH */
+.search-bar {
+    border: 0;
+    box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, 0.2);
+    padding: 6px 20px;
+}
+
+.search-bar:focus {
+    border: 0;
+    box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, 0.2);
+}
+
+.search-bar::placeholder {
+    color: #8895A7;
+    font-size: 16px;
+}
+
+/* -------------------------------------------- */
+/* REGISTER & LOGIN STYLES */
+/* ------------------------------------------- */
+#heading {
+    text-align: center;
+    width: 100%;
+    margin-top: 4px;
+}
+
+.user-access {
+    width: 100%; 
+    margin: 25px auto;
+}
+
+.card {
+    margin: 40px auto;
+}
+
+.card-body {
+    padding: 40px;
+}
+
+.user-input {
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+.user-field {
+	margin-right: 60px;
+	padding: 20px;
+}
+
+.user-btn {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 16px;
+    display: block;
+    width: 100%;
+}
+
+.back-btn {
+    color: #8895A7;
+    margin-left: 40px;
+}
+
+.back-btn:hover {
+    color: #5F6B7A;
+    text-decoration: underline;
+}
+
+.back-btn:focus {
+    color: #5F6B7A;
+    text-decoration: underline;
+}
+
+/* -------------------------------------------- */
+/* CAMPGROUND INDEX */
+/* ------------------------------------------- */
+.hero {
+    margin-top: 3rem;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+}
+
+.heading {
+    margin-bottom: 1rem;
+}
+
+
+
+
+/* CAMPGROUNDS DISPLAY */
+
+.campgrounds {
+    text-align: center !important;
+    margin-right: -15px;
+    margin-left: -15px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.img-thumbnail {
+    padding: 0;
+    border: 0;
+    box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, 0.2);
+    margin-bottom: 30px;
+    padding-bottom: 5px;
+    
+}
+
+.img-thumbnail:hover {
+    padding: 0;
+    padding-bottom: 5px;
+    
+}
+
+
+.img-thumbnail img {
+    width: 100%;
+}
+
+.img-thumbnail .caption {
+    padding: 20px;
+}
+
+/* Reviews */
+
+.campground-name {
+    font-size: 18px;
+}
+.fa-star.checked {
+    color: #F4CA64;
+}
+
+.fa-star {
+    font-size: 12px;
+    color: #212934;
+}
+
+.reviews {
+    color: #B0B0B0;
+}

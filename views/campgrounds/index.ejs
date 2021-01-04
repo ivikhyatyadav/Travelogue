@@ -1,0 +1,603 @@
+<% include ../partials/header %>
+<!--after navbar-->
+<div class="container">
+<section class="slider-pages">
+
+  <article class="js-scrolling__page js-scrolling__page-1 js-scrolling--active">
+    <div class="slider-page slider-page--left">
+      <div class="slider-page--skew">
+        <div class="slider-page__content">
+        </div>
+        <!-- /.slider-page__content -->
+      </div>
+      <!-- /.slider-page--skew -->
+    </div>
+    <!-- /.slider-page slider-page--left -->
+
+    <div class="slider-page slider-page--right">
+      <div class="slider-page--skew">
+        <div class="slider-page__content">
+          <h1 class="slider-page__title slider-page__title--big">
+            Travelogue
+          </h1>
+          <!-- /.slider-page__title slider-page__title--big -->
+          <h2 class="slider-page__title">
+            Start of your journey
+          </h2>
+          <!-- /.slider-page__title -->
+          <p class="slider-page__description">
+            Press the down arrow on your keyboard
+          </p>
+          <!-- /.slider-page__description -->
+        </div>
+        <!-- /.slider-page__content -->
+      </div>
+      <!-- /.slider-page--skew -->
+    </div>
+    <!-- /.slider-page slider-page--right -->
+  </article>
+  <!-- /.js-scrolling__page js-scrolling__page-1 js-scrolling--active -->
+
+
+  <article class="js-scrolling__page js-scrolling__page-2">
+    <div class="slider-page slider-page--left">
+      <div class="slider-page--skew">
+        <div class="slider-page__content">
+          <h1 class="slider-page__title">
+            Now you are here
+          </h1>
+          <!-- /.slider-page__title -->
+          <p class="slider-page__description">
+            Please continue scrolling
+          </p>
+          <!-- /.slider-page__description -->
+        </div>
+        <!-- /.slider-page__content -->
+      </div>
+      <!-- /.slider-page--skew -->
+    </div>
+    <!-- /.slider-page slider-page--left -->
+
+    <div class="slider-page slider-page--right">
+      <div class="slider-page--skew">
+        <div class="slider-page__content">
+        </div>
+        <!-- /.slider-page__content -->
+      </div>
+      <!-- /.slider-page--skew -->
+    </div>
+    <!-- /.slider-page slider-page--right -->
+  </article>
+  <!-- /.js-scrolling__page js-scrolling__page-2 -->
+
+
+  <article class="js-scrolling__page js-scrolling__page-3">
+    <div class="slider-page slider-page--left">
+      <div class="slider-page--skew">
+        <div class="slider-page__content">
+        </div>
+        <!-- /.slider-page__content -->
+      </div>
+      <!-- /.slider-page--skew -->
+    </div>
+    <!-- /.slider-page slider-page--left -->
+
+    <div class="slider-page slider-page--right">
+      <div class="slider-page--skew">
+        <div class="slider-page__content">
+          <h1 class="slider-page__title">
+            Final is just the beginning
+          </h1>
+          <!-- /.slider-page__title -->
+          <p class="slider-page__description">
+            Feel free to follow me on <a class="slider-page__link" href="https://twitter.com/WispProxy"
+                                         target="_blank">Twitter</a>
+            and check of <a class="slider-page__link" href="http://codepen.io/WispProxy/pens/public"
+                            target="_blank">my other works</a>
+          </p>
+          <!-- /.slider-page__description -->
+        </div>
+        <!-- /.slider-page__content -->
+      </div>
+      <!-- /.slider-page--skew -->
+    </div>
+    <!-- /.slider-page slider-page--right -->
+  </article>
+  <!-- /.js-scrolling__page js-scrolling__page-3 -->
+
+</section>
+<!-- /.slider-pages -->
+<script>
+  'use strict';
+
+/*********************
+ *	Helpers Code
+ ********************/
+/**
+ *  @function   DOMReady
+ *
+ *  @param callback
+ *  @param element
+ *  @param listener
+ *  @returns {*}
+ *  @constructor
+ */
+var DOMReady = function DOMReady() {
+  var callback = arguments.length <= 0 || arguments[0] === undefined ? function () {} : arguments[0];
+  var element = arguments.length <= 1 || arguments[1] === undefined ? document : arguments[1];
+  var listener = arguments.length <= 2 || arguments[2] === undefined ? 'addEventListener' : arguments[2];
+
+  return element[listener] ? element[listener]('DOMContentLoaded', callback) : window.attachEvent('onload', callback);
+};
+
+/**
+ *  @function   ProjectAPI
+ *
+ *  @type {{hasClass, addClass, removeClass}}
+ */
+var ProjectAPI = function () {
+  var hasClass = undefined,
+      addClass = undefined,
+      removeClass = undefined;
+
+  hasClass = function hasClass(el, className) {
+    if (el === null) {
+      return;
+    }
+
+    if (el.classList) {
+      return el.classList.contains(className);
+    } else {
+      return !!el.className.match(new RegExp('(\\s|^)' + className + '(\\s|$)'));
+    }
+  };
+
+  addClass = function addClass(el, className) {
+    if (el === null) {
+      return;
+    }
+
+    if (el.classList) {
+      el.classList.add(className);
+    } else if (!hasClass(el, className)) {
+      el.className += ' ' + className;
+    }
+  };
+
+  removeClass = function removeClass(el, className) {
+    if (el === null) {
+      return;
+    }
+
+    if (el.classList) {
+      el.classList.remove(className);
+    } else if (hasClass(el, className)) {
+      var reg = new RegExp('(\\s|^)' + className + '(\\s|$)');
+
+      el.className = el.className.replace(reg, ' ');
+    }
+  };
+
+  return {
+    hasClass: hasClass,
+    addClass: addClass,
+    removeClass: removeClass
+  };
+}();
+
+/*********************
+ *	Application Code
+ ********************/
+/**
+ *  @function   readyFunction
+ *
+ *  @type {Function}
+ */
+var readyFunction = function readyFunction() {
+
+  var KEY_UP = 38;
+  var KEY_DOWN = 40;
+
+  var scrollingClass = 'js-scrolling',
+      scrollingActiveClass = scrollingClass + '--active',
+      scrollingInactiveClass = scrollingClass + '--inactive',
+      scrollingTime = 1350,
+      scrollingIsActive = false,
+      currentPage = 1,
+      countOfPages = document.querySelectorAll('.' + scrollingClass + '__page').length,
+      prefixPage = '.' + scrollingClass + '__page-',
+      _switchPages = undefined,
+      _scrollingUp = undefined,
+      _scrollingDown = undefined,
+      _mouseWheelEvent = undefined,
+      _keyDownEvent = undefined,
+      init = undefined;
+
+  /**
+   *  @function _switchPages
+   *
+   *  @private
+   */
+  _switchPages = function _switchPages() {
+
+    var _getPageDomEl = undefined;
+
+    /**
+      *  @function _getPageDomEl
+      *
+      *  @param page
+      *  @returns {Element}
+      *  @private
+     */
+    _getPageDomEl = function _getPageDomEl() {
+      var page = arguments.length <= 0 || arguments[0] === undefined ? currentPage : arguments[0];
+
+      return document.querySelector(prefixPage + page);
+    };
+
+    scrollingIsActive = true;
+
+    ProjectAPI.removeClass(_getPageDomEl(), scrollingInactiveClass);
+    ProjectAPI.addClass(_getPageDomEl(), scrollingActiveClass);
+
+    ProjectAPI.addClass(_getPageDomEl(currentPage - 1), scrollingInactiveClass);
+
+    ProjectAPI.removeClass(_getPageDomEl(currentPage + 1), scrollingActiveClass);
+
+    setTimeout(function () {
+      return scrollingIsActive = false;
+    }, scrollingTime);
+  };
+  /**
+    *  @function _scrollingUp
+    *
+    *  @private
+    */
+  _scrollingUp = function _scrollingUp() {
+    if (currentPage === 1) {
+      return;
+    }
+
+    currentPage--;
+
+    _switchPages();
+  };
+  /**
+    *  @function _scrollingDown
+    *
+    *  @private
+    */
+  _scrollingDown = function _scrollingDown() {
+    if (currentPage === countOfPages) {
+      return;
+    }
+
+    currentPage++;
+
+    _switchPages();
+  };
+  /**
+    *  @function _mouseWheelEvent
+    *
+    *  @param e
+    *  @private
+    */
+  _mouseWheelEvent = function _mouseWheelEvent(e) {
+    if (scrollingIsActive) {
+      return;
+    }
+
+    if (e.wheelDelta > 0 || e.detail < 0) {
+      _scrollingUp();
+    } else if (e.wheelDelta < 0 || e.detail > 0) {
+      _scrollingDown();
+    }
+  };
+  /**
+    *  @function _keyDownEvent
+    *
+    *  @param e
+    *  @private
+    */
+  _keyDownEvent = function _keyDownEvent(e) {
+    if (scrollingIsActive) {
+      return;
+    }
+
+    var keyCode = e.keyCode || e.which;
+
+    if (keyCode === KEY_UP) {
+      _scrollingUp();
+    } else if (keyCode === KEY_DOWN) {
+      _scrollingDown();
+    }
+  };
+
+  /**
+   *  @function init
+   *
+   *  @note     auto-launch
+   */
+  init = function () {
+    document.addEventListener('mousewheel', _mouseWheelEvent, false);
+    document.addEventListener('DOMMouseScroll', _mouseWheelEvent, false);
+
+    document.addEventListener('keydown', _keyDownEvent, false);
+  }();
+};
+
+/**
+ *  Launcher
+ */
+DOMReady(readyFunction);
+
+//nav.js
+const menuBtn = document.querySelector(".menu-icon span");
+      const searchBtn = document.querySelector(".search-icon");
+      const cancelBtn = document.querySelector(".cancel-icon");
+      const items = document.querySelector(".nav-items");
+      const form = document.querySelector("form");
+      menuBtn.onclick = ()=>{
+        items.classList.add("active");
+        menuBtn.classList.add("hide");
+        searchBtn.classList.add("hide");
+        cancelBtn.classList.add("show");
+      }
+      cancelBtn.onclick = ()=>{
+        items.classList.remove("active");
+        menuBtn.classList.remove("hide");
+        searchBtn.classList.remove("hide");
+        cancelBtn.classList.remove("show");
+        form.classList.remove("active"); 
+      }
+      searchBtn.onclick = ()=>{
+        form.classList.add("active");
+        searchBtn.classList.add("hide");
+        cancelBtn.classList.add("show");
+      }
+</script>
+  
+</div>
+ <!--after jumbotron-->
+    <div class="container">
+
+        <h1 class="my-4">Welcome to Travelogue & Camp Management System</h1>
+  
+        <!-- Marketing Icons Section -->
+        <div class="row">
+            <div class="col-lg-4 mb-4">
+                <div class="card">
+                    <h4 class="card-header" style="background-color: rgb(85, 83, 83);color: lightgray;">Think about Camp</h4>
+                   
+                        <p class="card-text" style="padding-left:2%;">Camping is an inspiring way to escape into the lap of nature and get an ideal escape from the hectic and boring day-to-day life. </p>
+                        <p>Trust me; there is no better feeling in this world than gazing at the stars at night or having fun with friends at the campfire.....</p>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <div class="card">
+                    <h4 class="card-header"style="background-color: rgb(85, 83, 83);color: lightgray;"">Feel the life with nature</h4>
+                   
+                        <p class="card-text" style="padding-left:2%">Without the intense touch of nature, you can never fully freshen yourself!</p>
+                        <p> Go for a camping and there both your weary mind and your exhausted body will rise like a morning sun!...</p>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <div class="card">
+                    <h4 class="card-header" style="background-color: rgb(85, 83, 83);color: lightgray;">Who you could Help</h4>
+                   
+                        <p class="card-text" style="padding-left:2%">The friendships made in camps are very special. These bonds are so unique that they often last for a lifetime.</p>
+                        <p>It may be because we go for the camp solo at the same time for some reason...</p>
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <br>   
+        <h5 style="font-size: 50px;font-family: verdana;">Camp Picks</h5>       
+<div class="mySlides fade" >
+  <img src="https://campmonk.com/img/home-banner/campmonk-camping-bangalore-2.jpg" style="width:100%;height: 75%">
+  <div class="text"></div>
+</div>
+
+<div class="mySlides fade">
+  <img src="https://www.threeriversparks.org/sites/default/files/2017-03/LA_Camping_Billboard_01.jpg" style="width:100%;height: 75%">
+  <div class="text"></div>
+</div>
+
+<div class="mySlides fade">
+  
+  <img src="https://campmonk.com/img/home-banner/campmonk-camping-bangalore-1.jpg" style="width:100%;height: 75%">
+  <div class="text"></div>
+</div>
+
+<div class="mySlides fade">
+  <img src="https://www.environment.sa.gov.au/files/sharedassets/good_living/images/content/2017/11/onkaparinga-campground-review/onkaparinga-campground-review-large.jpg" style="width:100%;height: 75%">
+  <div class="text"></div>
+</div>
+
+</div>
+<br>
+
+<div style="text-align:center">
+  <span class="dot"></span> 
+  <span class="dot"></span> 
+  <span class="dot"></span> 
+  <span class="dot"></span>
+  
+</div>
+
+<script>
+var slideIndex = 0;
+showSlides();
+
+function showSlides() {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("dot");
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";  
+  }
+  slideIndex++;
+  if (slideIndex > slides.length) {slideIndex = 1}    
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";  
+  dots[slideIndex-1].className += " active";
+  setTimeout(showSlides, 2000); // Change image every 2 seconds
+}
+</script>
+
+
+    <header class="hero">
+        <div>
+            <h1>Welcome to Travelogue</h1>
+            <p>View our hand-picked campgrounds from all over the world</p>
+            
+            <p>
+              <form action="/campgrounds" method="get" target="_top" id="search-form">
+                <input name="search" type="text" placeholder="Search Camp..." autocomplete="off" autofocus >
+                 </form>
+              <p class="info"></p>
+            </p>
+        </div>
+    </header>
+        
+
+    <script>
+      const searchForm = document.querySelector("#search-form");
+const searchFormInput = searchForm.querySelector("input"); // <=> document.querySelector("#search-form input");
+const info = document.querySelector(".info");
+
+// The speech recognition interface lives on the browser’s window object
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition; // if none exists -> undefined
+
+if(SpeechRecognition) {
+  console.log("Your Browser supports speech Recognition");
+  
+  const recognition = new SpeechRecognition();
+  recognition.continuous = true;
+  // recognition.lang = "en-US";
+
+  searchForm.insertAdjacentHTML("beforeend", '<button type="button"><i class="fa fa-microphone"></i></button>');
+  //searchFormInput.style.paddingRight = "50px";
+
+  const micBtn = searchForm.querySelector("button");
+  const micIcon = micBtn.firstElementChild;
+
+  micBtn.addEventListener("click", micBtnClick);
+  function micBtnClick() {
+    if(micIcon.classList.contains("fa-microphone")) { // Start Voice Recognition
+      recognition.start(); // First time you have to allow access to mic!
+    }
+    else {
+      recognition.stop();
+    }
+  }
+
+  recognition.addEventListener("start", startSpeechRecognition); // <=> recognition.onstart = function() {...}
+  function startSpeechRecognition() {
+    micIcon.classList.remove("fa-microphone");
+    micIcon.classList.add("fa-microphone-slash");
+    searchFormInput.focus();
+    console.log("Voice activated, SPEAK");
+  }
+
+  recognition.addEventListener("end", endSpeechRecognition); // <=> recognition.onend = function() {...}
+  function endSpeechRecognition() {
+    micIcon.classList.remove("fa-microphone-slash");
+    micIcon.classList.add("fa-microphone");
+    searchFormInput.focus();
+    console.log("Speech recognition service disconnected");
+  }
+
+  recognition.addEventListener("result", resultOfSpeechRecognition); // <=> recognition.onresult = function(event) {...} - Fires when you stop talking
+  function resultOfSpeechRecognition(event) {
+    const current = event.resultIndex;
+    const transcript = event.results[current][0].transcript;
+    
+    if(transcript.toLowerCase().trim()==="stop recording") {
+      recognition.stop();
+    }
+    else if(!searchFormInput.value) {
+      searchFormInput.value = transcript;
+    }
+    else {
+      if(transcript.toLowerCase().trim()==="go") {
+        searchForm.submit();
+      }
+      else if(transcript.toLowerCase().trim()==="reset input") {
+        searchFormInput.value = "";
+      }
+      else {
+        searchFormInput.value = transcript;
+      }
+    }
+     searchFormInput.value = transcript;
+     searchFormInput.focus();
+     setTimeout(() => {
+       searchForm.submit();
+     }, 500);
+  }
+  
+  info.textContent = 'Voice Commands: "stop recording", "reset input", "go"';
+  
+}
+else {
+  console.log("Your Browser does not support speech Recognition");
+  info.textContent = "Your Browser does not support Speech Recognition";
+}
+    </script>
+
+    
+        <div class="heading">
+            <p style="font-size:60px" >Campgrounds</p>
+        </div>
+        
+        <div class="campgrounds">
+            <% if (noMatch !== null) {%>
+              <div class="col-md-12">
+                <h4><%= noMatch %></h4>
+              </div>
+            <% } %>
+            <% campgrounds.forEach(function(campground) { %>
+                <div class="col-md-3 col-sm-6">
+                    <div class="img-thumbnail">
+                        <div class="header-img">
+                         <img  src="<%= campground.image %>">
+                         </div>
+                        <div class="caption">
+                            <h4 class="campground-name"><%= campground.name %></h4>
+                            <% if (campground.rating === 0) { %>
+                                <span class="reviews">No reviews yet.</span>
+                            <% } else { %>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star <% if (campground.rating > 1.5) { %> checked <% } %>"></span>
+                                <span class="fa fa-star <% if (campground.rating > 2.5) { %> checked <% } %>"></span>
+                                <span class="fa fa-star <% if (campground.rating > 3.5) { %> checked <% } %>"></span>
+                                <span class="fa fa-star <% if (campground.rating > 4.5) { %> checked <% } %>"></span>
+                            <% } %>
+                        
+                        </div>
+                        <style>
+                          a:hover
+                          {
+                              background-color: red; 
+                          }
+              
+                      </style>
+                        <p>
+                            <a href="/campgrounds/<%= campground._id %>" class="btn btn-secondary btn-sm" style="background-color:blue;color: honeydew;"></style>>More Info</a>
+                        </p>
+                    </div>
+                </div>
+            <% }); %>
+    </div>
+
+    <hr>
+ <!-- Features Section -->
+ 
+
+
+<% include ../partials/footer %>
+

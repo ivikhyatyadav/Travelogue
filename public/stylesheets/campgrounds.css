@@ -1,0 +1,88 @@
+/* -------------------------------------------- */
+/* CAMPGROUND: SHOW */
+/* ------------------------------------------- */
+
+#delete-form {
+    display: inline;
+}
+
+/* Google Maps */
+#map {
+    height: 400px;
+    width: 100%;
+}
+
+.submitter {
+    color: #B0B0B0;
+    font-size: 18px;
+}
+
+.caption-full {
+    padding-bottom: 20px;
+    padding-right: 20px;
+    padding-left: 20px;
+}
+
+.review-btn {
+    margin-bottom: 5px;
+    background-color: #ffffff;
+    color: #38C172;
+    border: 2px solid #E1E7EC;
+    box-shadow: none;
+    font-size: 18px;
+}
+
+.review-btn:hover {
+    background-color: #ffffff;
+    color: #38C172;
+    border: 2px solid #E1E7EC;
+}
+
+.review-btn:focus {
+    box-shadow: none;
+    background-color: #E1E7EC;
+    border: none;
+    
+}
+
+.fa-search {
+    margin-right: 10px;
+}
+
+.card {
+    border: 0;
+    box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, 0.2);
+}
+
+.rating {
+    padding-left: 0;
+}
+
+
+.btn-danger, .btn-danger:hover {
+    color: #B82020;
+    background-color: #FCE8E8;
+    border: none;
+    font-weight: bold;
+}
+
+.btn-warning {
+    color: #CAA53D;
+    background-color: #FDF3D7;
+    font-weight: bold;
+    border: none;
+}
+
+.btn-warning:hover {
+    color: #CAA53D;
+    background-color: #FDF3D7;
+    font-weight: bold;
+    border-color: #CAA53D;
+}
+
+.btn-warning:focus {
+    color: #212934;
+    background-color: #CAA53D;
+    border-color: #CAA53D;
+}
+

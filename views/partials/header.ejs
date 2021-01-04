@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Travelogue</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css?family=Karla" rel="stylesheet">
+        <link rel="stylesheet" href="/stylesheets/main.css">
+        <link rel="stylesheet" href="/stylesheets/campgrounds.css">
+        <link rel="stylesheet" href="/stylesheets/slide.css">
+        <link rel="stylesheet" href="/stylesheets/scrolling_slideshow.css">
+    </head>
+    <style>
+            nav {
+                margin-bottom: 20px;
+                background-color: rgb(129, 127, 127);
+            }
+        </style>
+    <body>
+    
+    <nav class="navbar navbar-expand-lg navbar-default bg-dark">
+        
+            <div class="container-fluid">
+                <div class="navbar-brand mb-0 h1">
+                    <a class="navbar-brand" href="https://www.graphicsprings.com/filestorage/stencils/e666f320c4c1e4d543ab634ca8a7a598.png?width=500&height=500"></a>
+                </div>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/campgrounds">Home</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link"  onclick="myFunction()" style="padding-left:20px">Contact us</a>
+      
+                  
+      
+                            <script>
+                             function myFunction() {
+                              alert("Contact on email id: info@travelogue.gmail.com");
+                               }
+                             </script>
+                             </li>
+                             <li>
+                            <a class="nav-item nav-link"  href="/campgrounds/new" style="padding-left:20px">List your land</a>
+                          </li>    
+                    </ul>
+                    <ul class="navbar-nav">
+                        
+                          <!--if no user -->
+                        <% if(!currentUser) { %>
+                            <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/register">Sign Up</a></li>
+                        <% } else { %>
+                            
+                            <li class="nav-item"><a class="nav-link" href="#"><i class="far fa-user-circle"></i><%= currentUser.username %></a></li>
+                            <li class="nav-item"><a class="nav-link logout" href="/logout">Logout</a></li>
+                        <% } %>
+                        
+
+                    </ul>
+                </div>
+            </div>
+    </nav>
+    
+    <% if(error && error.length > 0) { %>
+        <div class="container">
+            <div class="alert alert-danger" role="alert">
+                <%= error %>
+            </div>
+        </div>
+    <% } %>
+    <% if(success && success.length > 0) { %>
+        <div class="container">
+            <div class="alert alert-success" role="alert">
+                <%= success %>
+            </div>
+        </div>
+    <% } %>
+    <div class="container">
+   

@@ -1,0 +1,27 @@
+<% include ./partials/header %>
+
+<div class="row">
+    <div class="card">
+        <div class="card-body">
+            <h3 id="heading">Login</h3>
+            <div class="user-access">
+                <form action="/login" method="post">
+                    <div class="form-group user-input">
+                        <input class="form-control user-field" type="text" name="username" placeholder="Username">
+                    </div>
+                    <div class="form-group user-input ">
+                        <input class="form-control user-field" type="password" name="password" placeholder="Password">
+                    </div>
+                    <div class="form-group user-input">
+                        <button class="btn btn-primary btn-block user-btn">Login</button>
+                    </div>
+                </form>
+                <a href="/campgrounds" class="back-btn">Go Back</a>
+            </div>
+        </div>
+
+    </div>
+    
+</div>
+
+<% include ./partials/footer %>
